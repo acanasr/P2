@@ -33,7 +33,7 @@ public class Laser : MonoBehaviour
                     l_RaycastHit.collider.GetComponent<PlayerCheckpointSystem>().PlayerDie();
                     break;
                 case "Turret":
-                    l_RaycastHit.collider.GetComponent<Turret>().TurretDie();
+                    if(l_RaycastHit.collider.GetComponent<Turret>()!= null) l_RaycastHit.collider.GetComponent<Turret>().TurretDie();
                     break;
                 case "Button":
                     l_RaycastHit.collider.GetComponent<ButtonEvent>().UseButton();
@@ -44,7 +44,6 @@ public class Laser : MonoBehaviour
                 default:
                     break;
             }
-
         }
 
         m_Laser.SetPosition(1, new Vector3(0.0f, 0.0f, l_LaserDistance));

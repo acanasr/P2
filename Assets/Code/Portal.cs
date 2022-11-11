@@ -28,7 +28,7 @@ public class Portal : MonoBehaviour
     public Laser m_Laser;
     float m_TimeSinceLastTeleport;
 
-
+    public bool m_LaserEnabled;
 
     void Start()
     {
@@ -66,10 +66,11 @@ public class Portal : MonoBehaviour
             m_PortalCylinder.material = m_ShaderPortalMaterial;
 
         }
-
+        m_Laser.gameObject.SetActive(m_LaserEnabled);
+        m_MirrorPortal.m_LaserEnabled = false;
         //Checks if is receiving teleport info or not, if its not unsets the other portal Laser.
-        m_TimeSinceLastTeleport += Time.deltaTime;
-        if (m_MirrorPortal.m_Laser.gameObject.activeSelf && m_TimeSinceLastTeleport > 0.1f) m_MirrorPortal.m_Laser.gameObject.SetActive(false);
+        //m_TimeSinceLastTeleport += Time.deltaTime;
+        //if (m_MirrorPortal.m_Laser.gameObject.activeSelf && m_TimeSinceLastTeleport > 0.1f) m_MirrorPortal.m_LaserEnabled = false;
     }
     public bool IsValidPosition(Vector3 StartPosition, Vector3 Forward, float MaxDistance, LayerMask PortalLayerMask, out Vector3 Position, out Vector3 Normal, out bool IsNonDrawableWall)
     {
@@ -131,12 +132,12 @@ public class Portal : MonoBehaviour
 
     public void TeleportLaser(Vector3 hitPoint, LineRenderer LaserToTeleport)
     {
-        if (m_MirrorPortal.m_Laser.gameObject.activeSelf) return; // if laser's active return (it wont update as good but prevents stack overflow)
+        //if (m_MirrorPortal.m_Laser.gameObject.activeSelf) return; // if laser's active return (it wont update as good but prevents stack overflow)
         if (!m_MirrorPortal.gameObject.activeSelf) return; //if other portal is not active do not do the logic
-
+        if (m_MirrorPortal.m_LaserEnabled) return;
         m_TimeSinceLastTeleport = 0.0f;
-        
-        m_MirrorPortal.m_Laser.gameObject.SetActive(true);
+
+        m_MirrorPortal.m_LaserEnabled = true;
 
         Vector3 l_LocalPosition =
             m_OtherPortalTransform.InverseTransformPoint(hitPoint);
