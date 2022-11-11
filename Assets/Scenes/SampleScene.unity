@@ -7853,7 +7853,6 @@ MonoBehaviour:
   m_MinValidDistance: 0.3
   m_MinDotValidAngle: 0.995
   m_Laser: {fileID: 1328307069}
-  m_LaserEnabled: 0
 --- !u!1 &1557939354798399771
 GameObject:
   m_ObjectHideFlags: 0
@@ -8746,4 +8745,3 @@ MonoBehaviour:
   m_MinValidDistance: 0.3
   m_MinDotValidAngle: 0.995
   m_Laser: {fileID: 1844246059}
-  m_LaserEnabled: 0
